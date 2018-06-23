@@ -1,0 +1,62 @@
+﻿form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+}
+
+form.example button {
+    padding-top: 0px;
+    float: left;
+    width: 20%;
+    height: 46px;
+    text-align: center;
+    background: #2196F3;
+    color: white;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    font-size: 35px;
+}
+
+    form.example button:hover {
+        background: #0b7dda;
+    }
+
+form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.squaredOne {
+    width: 20px;
+    height: 20px;
+    background: #ddd;
+    margin: 0px 10% 0px;
+    padding-right: 10px;
+    border-radius: 100%;
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+}
+
+.myTable {
+    text-align: center;
+}
+
+#note {
+    position: absolute;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    text-align: center;
+    line-height: 2.5;
+    overflow: hidden;
+    -webkit-box-shadow: 0 0 5px black;
+    -moz-box-shadow: 0 0 5px black;
+    box-shadow: 0 0 5px black;
+    font-size: 15px;
+}

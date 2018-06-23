@@ -1,0 +1,143 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    @model List<item>
+
+    @{
+        ViewBag.Title = "Index";
+    }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>TODO List</title>
+
+
+
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/bootstrap-theme.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/StyleSheet1.css")" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+</head>
+
+<!--
+<div id="note" style="display: none">
+    Data has been saved.
+</div>
+-->
+
+<div id ="note"style="display: none" class="alert alert-success">
+    <strong>Success!</strong> Data has been saved into the database.
+</div>
+<body>
+
+        <main role="main">
+
+        <section class="jumbotron text-center">
+        <div class="container">
+        <h1 class="jumbotron-heading">TODO List</h1>
+        <p class="lead text-muted">This is private project created by Luboš Hájek. This is TODO list for my own use and please do not encroach to list. If you have some questions you can ask on email address: <a href="mailto:hajeklu@outlook.com">hajeklu@outlook.com</a></p>
+
+        @using (Html.BeginForm("Add", "Home", FormMethod.Post, new { @class = "example" }))
+                {
+                    <input type="text" placeholder="Add item.." name="description" autocomplete="off">
+                    <button type="submit">+<i class="fa fa-search"></i></button>
+                }
+        </div>
+        </section>
+
+        <div class="album py-5 bg-light">
+        <div class="container">
+        <table class=" myTable, table table-striped">
+        <thead>
+        <tr>
+        <th style="width: 8%" scope="col">-</th>
+        <th style="width: 72%" scope="col">Description</th>
+        <th style="width: 10%" scope="col">Done</th>
+        <th style="width: 10%" scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for (int i = 1; i < Model.Count + 1; i++)
+                    {
+                        <tr>
+                            <th>
+                                @i
+                            </th>
+                            <th>
+                                @Model[i - 1].description
+                            </th>
+                            <th>
+                                <div>
+                                    @Html.CheckBox("checkdone", Model[i - 1].done != 0, new { @class = "squaredOne", onchange = "setcheckbox(this, "+@Model[i - 1].iditem +")" })
+                                </div>
+                            </th>
+                            <th>
+                                <button type="button" class="btn btn-danger" onclick="location.href = '@Url.Action("Delete", "Home", Model[i - 1])'">X</button>
+                            </th>
+                        </tr>
+                    }
+
+        </tbody>
+        </table>
+        </div>
+        </div>
+
+    </main>
+
+    <footer class="text-muted">
+        <div class="container">
+            <p class="float-right">
+            </p>
+            <p>Create by Luboš Hájek © 2017-2018 by <a href="https://www.asp.net/"> ASP.NET MVC</a>, data stored in <a href="https://www.mysql.com/">MySQL</a> powered by <a href="http://tomcat.apache.org/">Apache Tomcat</a></p>
+            <p>Tamplate from Bootstrap <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+
+        <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <script src="~/Scripts/modernizr-2.8.3.js"></script>
+</body>
+</html>
+
+
+        
+        
+<script type="text/javascript">
+    function setcheckbox(element, model) {
+        var value = element.checked;
+        var item = model;
+
+
+        var jsonObject = {
+            "value" : element.checked,
+            "iditem" : model
+        }
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ajaxCheck", "Home")',
+            data: jsonObject,
+            dataType: 'json',
+
+            success: function(Data) {
+                $("#note").show();
+                setTimeout(function() { $("#note").hide(); }, 2000);
+            },
+            error: function() {
+                alert("error");
+            }
+        });
+    }
+
+</script>
