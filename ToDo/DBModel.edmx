@@ -12,6 +12,7 @@
           <Property Name="iditem" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="200" />
           <Property Name="done" Type="tinyint" />
+          <Property Name="id_userlogin" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="userlogin">
           <Key>
@@ -21,9 +22,25 @@
           <Property Name="login" Type="varchar" MaxLength="45" />
           <Property Name="password" Type="varchar" MaxLength="200" />
         </EntityType>
+        <Association Name="id_userlogin">
+          <End Role="userlogin" Type="Self.userlogin" Multiplicity="1" />
+          <End Role="item" Type="Self.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userlogin">
+              <PropertyRef Name="iduser" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="id_userlogin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="todo_listModelStoreContainer">
           <EntitySet Name="item" EntityType="Self.item" Schema="todo_list" store:Type="Tables" />
           <EntitySet Name="userlogin" EntityType="Self.userlogin" Schema="todo_list" store:Type="Tables" />
+          <AssociationSet Name="id_userlogin" Association="Self.id_userlogin">
+            <End Role="userlogin" EntitySet="userlogin" />
+            <End Role="item" EntitySet="item" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -36,10 +53,16 @@
           <Property Name="iditem" Type="Int32" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="done" Type="SByte" />
+          <Property Name="id_userlogin" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="userlogin" Relationship="todo_listModel.id_userlogin" FromRole="item" ToRole="userlogin" />
         </EntityType>
         <EntityContainer Name="todo_listEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="items" EntityType="Self.item" />
           <EntitySet Name="userlogins" EntityType="todo_listModel.userlogin" />
+          <AssociationSet Name="id_userlogin" Association="todo_listModel.id_userlogin">
+            <End Role="userlogin" EntitySet="userlogins" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="userlogin">
           <Key>
@@ -48,7 +71,20 @@
           <Property Name="iduser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="login" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="items" Relationship="todo_listModel.id_userlogin" FromRole="userlogin" ToRole="item" />
         </EntityType>
+        <Association Name="id_userlogin">
+          <End Type="todo_listModel.userlogin" Role="userlogin" Multiplicity="1" />
+          <End Type="todo_listModel.item" Role="item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userlogin">
+              <PropertyRef Name="iduser" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="id_userlogin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -58,6 +94,7 @@
           <EntitySetMapping Name="items">
             <EntityTypeMapping TypeName="todo_listModel.item">
               <MappingFragment StoreEntitySet="item">
+                <ScalarProperty Name="id_userlogin" ColumnName="id_userlogin" />
                 <ScalarProperty Name="iditem" ColumnName="iditem" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="done" ColumnName="done" />

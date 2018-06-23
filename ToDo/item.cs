@@ -7,17 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Web.Security;
-
 namespace ToDo
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class item : MembershipUser
+    public partial class item
     {
         public int iditem { get; set; }
         public string description { get; set; }
         public Nullable<sbyte> done { get; set; }
+        public int id_userlogin { get; set; }
+    
+        public virtual userlogin userlogin { get; set; }
     }
 }

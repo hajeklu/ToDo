@@ -7,6 +7,7 @@
       <Diagram DiagramId="0126084d93534357b6931f724f4b549a" Name="Diagram1">
         <EntityTypeShape EntityType="todo_listModel.item" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="todo_listModel.userlogin" Width="1.5" PointX="3.375" PointY="0.75" />
+        <AssociationConnector Association="todo_listModel.id_userlogin" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

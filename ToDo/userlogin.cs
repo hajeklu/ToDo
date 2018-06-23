@@ -14,8 +14,17 @@ namespace ToDo
     
     public partial class userlogin
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public userlogin()
+        {
+            this.items = new HashSet<item>();
+        }
+    
         public int iduser { get; set; }
         public string login { get; set; }
         public string password { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<item> items { get; set; }
     }
 }
