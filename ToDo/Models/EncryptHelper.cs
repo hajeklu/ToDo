@@ -17,6 +17,7 @@ namespace ToDo.Models
                 UTF8Encoding utf8Encoding = new UTF8Encoding();
                 byte[] data = md5.ComputeHash(utf8Encoding.GetBytes(password));
                 return Convert.ToBase64String(data);
+                
             }
         }
 

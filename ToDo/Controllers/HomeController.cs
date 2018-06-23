@@ -15,6 +15,7 @@ namespace ToDo.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        // main page
         [Authorize]
         public ActionResult Index()
         {
@@ -25,6 +26,8 @@ namespace ToDo.Controllers
             };
             return View(itemsList);
         }
+
+        // add new item 
         [HttpPost]
         public ActionResult Add(String description)
         {
