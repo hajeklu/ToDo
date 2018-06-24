@@ -24,12 +24,6 @@
 
 <body>
 
-@if (TempData["error"] != null)
-{
-    <div class="alert alert-danger" role="alert">
-        @TempData["error"]
-    </div>
-}
 
 
 @using (Html.BeginForm("Singin", "Login", FormMethod.Post, new {@class = "form-signin"}))
@@ -56,6 +50,14 @@
     </div>
     <button class="btn btn-lg btn-primary btn-block">Sign in</button>
     <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
+
+    if (TempData["error"] != null)
+     {
+         <div class="alert alert-danger" role="alert">
+             @TempData["error"]
+         </div>
+     }
+
 }
 </body>
 </html>

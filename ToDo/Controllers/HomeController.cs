@@ -6,10 +6,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.Ajax.Utilities;
 using ToDo.Models;
 using WebGrease.Css.Ast.Selectors;
-
 namespace ToDo.Controllers
 {
     [Authorize]
@@ -22,7 +22,8 @@ namespace ToDo.Controllers
             List<item> itemsList = null;
             using (var dc = new todo_listEntities())
             {
-                itemsList = dc.items.ToList();
+                int id = getUserId();
+                itemsList = dc.items.ToList().Where(m => m.userlogin.iduser == id).ToList();
             };
             return View(itemsList);
         }
@@ -35,8 +36,9 @@ namespace ToDo.Controllers
             var i = new item();
             i.description = description;
             i.done = 0;
+            i.id_userlogin = getUserId();
             using (var dc = new todo_listEntities())
-            {
+            { 
                 dc.items.Add(i);
                 dc.SaveChanges();
             }
@@ -54,7 +56,7 @@ namespace ToDo.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public ActionResult ajaxCheck(DataModel model)
+        public String ajaxCheck(DataModel model)
         {
             List<item> items = null;
             using (var dc = new todo_listEntities())
@@ -63,9 +65,17 @@ namespace ToDo.Controllers
                 updateItem.done = Convert.ToSByte(model.value);
                 dc.SaveChanges();
 
-                items = dc.items.ToList();
+                items = dc.items.Include(m => m.userlogin).ToList();
             }
-            return new JsonResult {Data = items, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
+            // return new JsonResult {Data = items, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
+            return "{\"msg\":\"success\"}";
+        }
+
+        private int getUserId()
+        {
+            var cookie = Request.Cookies["myCookie"];
+            string var = cookie.Values["id"];
+            return Convert.ToInt32(cookie.Values["id"]);
         }
     }
 }

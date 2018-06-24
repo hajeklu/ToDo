@@ -22,7 +22,14 @@ namespace ToDo.Controllers
             bool remem = remember != null;
             if (new ToDoMemberShipProvider().ValidateUser(login, EncryptHelper.encryptPassword(password)))
             {
-                FormsAuthentication.SetAuthCookie(login, remem);
+                using (var dc = new todo_listEntities())
+                {
+                    userlogin user = dc.userlogins.FirstOrDefault(u => u.login.Equals(login));
+                    var myCookie = new HttpCookie("myCookie");
+                    myCookie.Values.Add("id", user.iduser.ToString());
+                    Response.Cookies.Add(myCookie);
+                    FormsAuthentication.SetAuthCookie(login, remem);
+                }
                 return RedirectToAction("Index", "Home");
             }
 

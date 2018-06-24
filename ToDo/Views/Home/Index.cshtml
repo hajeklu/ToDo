@@ -73,7 +73,7 @@
                             <th>
                                 <div>
                                     @Html.CheckBox("checkdone", Model[i - 1].done != 0, new { @class = "squaredOne", onchange = "setcheckbox(this, "+@Model[i - 1].iditem +")" })
-                                </div>
+                                 </div>
                             </th>
                             <th>
                                 <button type="button" class="btn btn-danger" onclick="location.href = '@Url.Action("Delete", "Home", Model[i - 1])'">X</button>
@@ -130,7 +130,7 @@
             data: jsonObject,
             dataType: 'json',
 
-            success: function(Data) {
+            success: function() {
                 $("#note").show();
                 setTimeout(function() { $("#note").hide(); }, 2000);
             },

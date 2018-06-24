@@ -8,7 +8,6 @@ namespace ToDo.Models
 {
     public class ToDoMemberShipProvider : MembershipProvider
     {
-        private todo_listEntities _entities = new todo_listEntities();
 
         public override bool EnablePasswordRetrieval => throw new NotImplementedException();
 
@@ -109,9 +108,13 @@ namespace ToDo.Models
 
         public override bool ValidateUser(string username, string password)
         {
-            userlogin userlogin =
-                (from u in _entities.userlogins where u.login.Equals(username) && u.password.Equals(password) select u)
-                .FirstOrDefault();
+
+            userlogin userlogin;
+            using (var _entities = new todo_listEntities())
+            {
+                userlogin = _entities.userlogins.FirstOrDefault(u => u.login.Equals(username) && u.password.Equals(password));
+            }
+
             return userlogin != null;
         }
     }
