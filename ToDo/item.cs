@@ -18,6 +18,7 @@ namespace ToDo
         public string description { get; set; }
         public Nullable<sbyte> done { get; set; }
         public int id_userlogin { get; set; }
+        public System.DateTime creationTime { get; set; }
     
         public virtual userlogin userlogin { get; set; }
     }

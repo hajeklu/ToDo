@@ -48,6 +48,7 @@ namespace ToDo.Controllers
             i.description = description;
             i.done = 0;
             i.id_userlogin = getUserId();
+            i.creationTime = DateTime.Now;
             using (var dc = new todo_listEntities())
             { 
                 dc.items.Add(i);

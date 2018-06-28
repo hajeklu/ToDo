@@ -70,7 +70,8 @@
                     <thead>
                         <tr>
                             <th style="width: 8%" scope="col">-</th>
-                            <th style="width: 72%" scope="col">Description</th>
+                            <th style="width: 62%" scope="col">Description</th>
+                            <th style="width: 10%" scope="col">Creation time</th>
                             <th style="width: 10%" scope="col">Done</th>
                             <th style="width: 10%" scope="col">Delete</th>
                         </tr>
@@ -84,6 +85,8 @@
                                 </th>
                                 <th>
                                     @Model[i - 1].description
+                                </th>
+                                <th>@Model[i - 1].creationTime.ToString("yyyy-MM-dd")
                                 </th>
                                 <th>
                                     <div>
@@ -154,7 +157,4 @@
             }
         });
     }
-
 </script>
-
-<script runat="server">

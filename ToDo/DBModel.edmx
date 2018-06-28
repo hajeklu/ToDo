@@ -12,6 +12,7 @@
           <Property Name="iditem" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="200" />
           <Property Name="done" Type="tinyint" />
+          <Property Name="creationTime" Type="datetime" Precision="0" />
           <Property Name="id_userlogin" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="userlogin">
@@ -55,6 +56,7 @@
           <Property Name="done" Type="SByte" />
           <Property Name="id_userlogin" Type="Int32" Nullable="false" />
           <NavigationProperty Name="userlogin" Relationship="todo_listModel.id_userlogin" FromRole="item" ToRole="userlogin" />
+          <Property Name="creationTime" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityContainer Name="todo_listEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="items" EntityType="Self.item" />
@@ -94,6 +96,7 @@
           <EntitySetMapping Name="items">
             <EntityTypeMapping TypeName="todo_listModel.item">
               <MappingFragment StoreEntitySet="item">
+                <ScalarProperty Name="creationTime" ColumnName="creationTime" />
                 <ScalarProperty Name="id_userlogin" ColumnName="id_userlogin" />
                 <ScalarProperty Name="iditem" ColumnName="iditem" />
                 <ScalarProperty Name="description" ColumnName="description" />
