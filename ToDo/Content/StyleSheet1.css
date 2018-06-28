@@ -60,3 +60,18 @@ form.example::after {
     box-shadow: 0 0 5px black;
     font-size: 15px;
 }
+
+#navbar {
+    border-radius: 0px;
+
+}
+
+.navbar {
+    position: fixed;
+    width: -webkit-fill-available;
+}
+
+#cont {
+    padding-top: 50px;
+
+}

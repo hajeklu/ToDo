@@ -4,16 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.UI;
 using Microsoft.Ajax.Utilities;
 using ToDo.Models;
 
 namespace ToDo.Controllers
 {
+    [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
     public class LoginController : Controller
     {
         // GET: Login
         public ActionResult Index()
         {
+            
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
             return View();
         }
 

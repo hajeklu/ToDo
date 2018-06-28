@@ -7,11 +7,13 @@ using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.UI;
 using Microsoft.Ajax.Utilities;
 using ToDo.Models;
 using WebGrease.Css.Ast.Selectors;
 namespace ToDo.Controllers
 {
+    [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
     [Authorize]
     public class HomeController : Controller
     {
@@ -22,16 +24,25 @@ namespace ToDo.Controllers
             List<item> itemsList = null;
             using (var dc = new todo_listEntities())
             {
+                ViewBag.name = User.Identity.Name;
                 int id = getUserId();
                 itemsList = dc.items.ToList().Where(m => m.userlogin.iduser == id).ToList();
+                
             };
+            
             return View(itemsList);
         }
 
         // add new item 
         [HttpPost]
+        [Authorize]
         public ActionResult Add(String description)
         {
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Login");
+            }
 
             var i = new item();
             i.description = description;
@@ -45,8 +56,14 @@ namespace ToDo.Controllers
 
             return RedirectToAction("Index");
         }
+        [Authorize]
         public ActionResult Delete(item item)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             using (var dc = new todo_listEntities())
             {
                 var i = dc.items.SingleOrDefault(it => it.iditem == item.iditem);
@@ -55,9 +72,16 @@ namespace ToDo.Controllers
             }
             return RedirectToAction("Index");
         }
+        [Authorize]
         [HttpPost]
         public String ajaxCheck(DataModel model)
         {
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                RedirectToAction("Index", "Login");
+            }
+
             List<item> items = null;
             using (var dc = new todo_listEntities())
             {
@@ -69,6 +93,21 @@ namespace ToDo.Controllers
             }
             // return new JsonResult {Data = items, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
             return "{\"msg\":\"success\"}";
+        }
+
+        public void Logout()
+        { 
+            Response.Cookies.Clear();
+            Session.Clear();
+            Session.RemoveAll();
+            Session.Abandon();
+            Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
+            Response.Cache.SetNoStore();
+            var cookie = Request.Cookies["myCookie"];
+            FormsAuthentication.SignOut();
+            cookie.Values["id"] = null;
+            Response.Redirect(Url.Action("Index", "Login"));
+            
         }
 
         private int getUserId()

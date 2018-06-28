@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    
 
     <title>TODO List</title>
 
@@ -32,58 +33,72 @@
 <div id ="note"style="display: none" class="alert alert-success">
     <strong>Success!</strong> Data has been saved into the database.
 </div>
-<body>
 
-        <main role="main">
+<body>
+    <main role="main">
+        
+        
+        <nav id="navbar" class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Todo - List</a>
+                </div>
+                <ul class="nav navbar-nav"></ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>   User: <b>@ViewBag.name </b></a></li>
+                    <li><a href='@Url.Action("Logout", "Home")' onclick="@Url.Action("Logout", "Home")"><span class="glyphicon glyphicon-log-in"></span>   Logout</a></li>
+                </ul>
+            </div>
+        </nav>
 
         <section class="jumbotron text-center">
-        <div class="container">
-        <h1 class="jumbotron-heading">TODO List</h1>
-        <p class="lead text-muted">This is private project created by Luboš Hájek. This is TODO list for my own use and please do not encroach to list. If you have some questions you can ask on email address: <a href="mailto:hajeklu@outlook.com">hajeklu@outlook.com</a></p>
+            <div id="cont" class="container">
+                <h1 class="jumbotron-heading">TODO List</h1>
+                <p class="lead text-muted">This is private project created by Luboš Hájek. This is TODO list for my own use and please do not encroach to list. If you have some questions you can ask on email address: <a href="mailto:hajeklu@outlook.com">hajeklu@outlook.com</a></p>
 
-        @using (Html.BeginForm("Add", "Home", FormMethod.Post, new { @class = "example" }))
+                @using (Html.BeginForm("Add", "Home", FormMethod.Post, new { @class = "example" }))
                 {
                     <input type="text" placeholder="Add item.." name="description" autocomplete="off">
                     <button type="submit">+<i class="fa fa-search"></i></button>
                 }
-        </div>
+            </div>
         </section>
 
         <div class="album py-5 bg-light">
-        <div class="container">
-        <table class=" myTable, table table-striped">
-        <thead>
-        <tr>
-        <th style="width: 8%" scope="col">-</th>
-        <th style="width: 72%" scope="col">Description</th>
-        <th style="width: 10%" scope="col">Done</th>
-        <th style="width: 10%" scope="col">Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        @for (int i = 1; i < Model.Count + 1; i++)
-                    {
+            <div class="container">
+                <table class=" myTable, table table-striped">
+                    <thead>
                         <tr>
-                            <th>
-                                @i
-                            </th>
-                            <th>
-                                @Model[i - 1].description
-                            </th>
-                            <th>
-                                <div>
-                                    @Html.CheckBox("checkdone", Model[i - 1].done != 0, new { @class = "squaredOne", onchange = "setcheckbox(this, "+@Model[i - 1].iditem +")" })
-                                 </div>
-                            </th>
-                            <th>
-                                <button type="button" class="btn btn-danger" onclick="location.href = '@Url.Action("Delete", "Home", Model[i - 1])'">X</button>
-                            </th>
+                            <th style="width: 8%" scope="col">-</th>
+                            <th style="width: 72%" scope="col">Description</th>
+                            <th style="width: 10%" scope="col">Done</th>
+                            <th style="width: 10%" scope="col">Delete</th>
                         </tr>
-                    }
+                    </thead>
+                    <tbody>
+                        @for (int i = 1; i < Model.Count + 1; i++)
+                        {
+                            <tr>
+                                <th>
+                                    @i
+                                </th>
+                                <th>
+                                    @Model[i - 1].description
+                                </th>
+                                <th>
+                                    <div>
+                                        @Html.CheckBox("checkdone", Model[i - 1].done != 0, new { @class = "squaredOne", onchange = "setcheckbox(this, " + @Model[i - 1].iditem + ")" })
+                                    </div>
+                                </th>
+                                <th>
+                                    <button type="button" class="btn btn-danger" onclick="location.href = '@Url.Action("Delete", "Home", Model[i - 1])'">X</button>
+                                </th>
+                            </tr>
+                        }
 
-        </tbody>
-        </table>
-        </div>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
     </main>
@@ -100,13 +115,13 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    
 
-        <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-        <script src="~/Scripts/jquery.validate.min.js"></script>
-        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-        <script src="~/Scripts/bootstrap.min.js"></script>
-        <script src="~/Scripts/modernizr-2.8.3.js"></script>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
 </body>
 </html>
 
@@ -141,3 +156,5 @@
     }
 
 </script>
+
+<script runat="server">
