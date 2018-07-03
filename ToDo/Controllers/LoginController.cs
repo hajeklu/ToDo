@@ -21,6 +21,7 @@ namespace ToDo.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult Singin(String login, String password, String remember)
         {
             bool remem = remember != null;

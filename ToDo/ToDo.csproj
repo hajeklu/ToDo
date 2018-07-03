@@ -192,7 +192,9 @@
     </Compile>
     <Compile Include="Models\DataModel.cs" />
     <Compile Include="Models\EncryptHelper.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Models\ToDoMemberShipProvider.cs" />
+    <Compile Include="Models\userlogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="userlogin.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
@@ -203,7 +205,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ErrorStyleSheet.css" />
     <Content Include="Content\LoginSheet.css" />
+    <Content Include="Content\RegistrationPage.css" />
     <Content Include="Content\StyleSheet1.css" />
     <Content Include="DBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -231,6 +235,7 @@
     <Content Include="DBModel.edmx.diagram">
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\ErrorHandler\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -259,6 +264,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Registration\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

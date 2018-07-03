@@ -109,7 +109,7 @@ namespace ToDo.Models
         public override bool ValidateUser(string username, string password)
         {
 
-            userlogin userlogin;
+            ToDo.userlogin userlogin;
             using (var _entities = new todo_listEntities())
             {
                 userlogin = _entities.userlogins.FirstOrDefault(u => u.login.Equals(username) && u.password.Equals(password));

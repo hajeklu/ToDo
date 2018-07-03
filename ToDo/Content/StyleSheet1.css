@@ -68,10 +68,14 @@ form.example::after {
 
 .navbar {
     position: fixed;
-    width: -webkit-fill-available;
+    width: 100%;
 }
 
 #cont {
     padding-top: 50px;
 
+}
+
+#fulltime {
+    font-size: 10px;
 }

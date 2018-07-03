@@ -12,7 +12,7 @@
           <Property Name="iditem" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="200" />
           <Property Name="done" Type="tinyint" />
-          <Property Name="creationTime" Type="datetime" Precision="0" />
+          <Property Name="creationTime" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="id_userlogin" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="userlogin">

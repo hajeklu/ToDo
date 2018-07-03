@@ -1,0 +1,38 @@
+﻿@model ToDo.userlogin
+
+@{
+    Layout = null;
+}
+<!------ Include the above in your HEAD tag ---------->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+    <link href="~/Content/RegistrationPage.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <form action='@Url.Action("Add" , "Registration", FormMethod.Post)' method="post">
+
+        <h1>Registration</h1>
+
+        <fieldset>
+            <legend><span class="number">1</span>Your basic info</legend>
+            <label for="name">Name:</label>
+            @Html.TextBoxFor(x => x.login, new { id = "name" })
+            @Html.ValidationMessageFor(x => x.login)
+            <label class="form-control" for="password">Password:</label>
+            @Html.TextBoxFor(x => x.password, new { id = "password", type = "password" })
+            @Html.ValidationMessageFor(x => x.password)
+            <label for="password">Verify password:</label>
+            <input type="password" id="password" name="user_password2">
+        </fieldset>
+        <button type="submit">Sign Up</button>
+    </form>
+
+</body>
+</html>

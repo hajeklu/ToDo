@@ -27,9 +27,17 @@ namespace ToDo.Controllers
                 ViewBag.name = User.Identity.Name;
                 int id = getUserId();
                 itemsList = dc.items.ToList().Where(m => m.userlogin.iduser == id).ToList();
-                
+                List<String> agoTimes = new List<string>();
+                foreach (item item in itemsList)
+                {
+                    agoTimes.Add(TimeAgo(item.creationTime));
+                }
+
+
+                ViewBag.agotime = agoTimes;
+
             };
-            
+            throw new NotImplementedException();
             return View(itemsList);
         }
 
@@ -116,6 +124,60 @@ namespace ToDo.Controllers
             var cookie = Request.Cookies["myCookie"];
             string var = cookie.Values["id"];
             return Convert.ToInt32(cookie.Values["id"]);
+        }
+
+        private string TimeAgo(DateTime dateTime)
+        {
+            string result = string.Empty;
+            var timeSpan = DateTime.Now.Subtract(dateTime);
+
+            if (timeSpan <= TimeSpan.FromSeconds(60))
+            {
+                result = string.Format("{0} seconds ago", timeSpan.Seconds);
+            }
+            else if (timeSpan <= TimeSpan.FromMinutes(60))
+            {
+                result = timeSpan.Minutes > 1 ?
+                    String.Format("about {0} minutes ago", timeSpan.Minutes) :
+                    "about a minute ago";
+            }
+            else if (timeSpan <= TimeSpan.FromHours(24))
+            {
+                result = timeSpan.Hours > 1 ?
+                    String.Format("about {0} hours ago", timeSpan.Hours) :
+                    "about an hour ago";
+            }
+            else if (timeSpan <= TimeSpan.FromDays(30))
+            {
+                result = timeSpan.Days > 1 ?
+                    String.Format("about {0} days ago", timeSpan.Days) :
+                    "yesterday";
+            }
+            else if (timeSpan <= TimeSpan.FromDays(365))
+            {
+                result = timeSpan.Days > 30 ?
+                    String.Format("about {0} months ago", timeSpan.Days / 30) :
+                    "about a month ago";
+            }
+            else
+            {
+                result = timeSpan.Days > 365 ?
+                    String.Format("about {0} years ago", timeSpan.Days / 365) :
+                    "about a year ago";
+            }
+
+            return result;
+        }
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            //   base.OnException(filterContext);
+            filterContext.ExceptionHandled = true;
+
+            filterContext.Result = new ViewResult
+            {
+                ViewName = "~/Views/ErrorHandler/Index.cshtml"
+            };
         }
     }
 }

@@ -12,6 +12,9 @@ namespace ToDo.Models
 
         public static String encryptPassword(String password)
         {
+            if (password == null)
+                return null;
+
             using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
             {
                 UTF8Encoding utf8Encoding = new UTF8Encoding();

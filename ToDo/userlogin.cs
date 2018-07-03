@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace ToDo
 {
     using System;
@@ -21,7 +23,9 @@ namespace ToDo
         }
     
         public int iduser { get; set; }
+        [Required(ErrorMessage = "Login is required")]
         public string login { get; set; }
+        [Required(ErrorMessage = "Login is required")]
         public string password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
