@@ -194,10 +194,13 @@
     <Compile Include="Models\EncryptHelper.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Models\ToDoMemberShipProvider.cs" />
-    <Compile Include="Models\userlogin.cs" />
+    <Compile Include="userloginP.cs">
+      <CustomToolNamespace>user</CustomToolNamespace>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="userlogin.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
+      <CustomToolNamespace>user</CustomToolNamespace>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -223,8 +226,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Views\Scripts\bootstrap.js" />
+    <Content Include="Views\Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -236,19 +239,19 @@
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Content>
     <Content Include="Views\ErrorHandler\Index.cshtml" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <None Include="Views\Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Views\Scripts\jquery-3.3.1.js" />
+    <Content Include="Views\Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Views\Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Views\Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Views\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Views\Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Views\Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Views\Scripts\jquery.validate.js" />
+    <Content Include="Views\Scripts\jquery.validate.min.js" />
+    <Content Include="Views\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Views\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Views\Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -279,8 +282,8 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Views\Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

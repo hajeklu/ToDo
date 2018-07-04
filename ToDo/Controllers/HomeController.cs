@@ -37,7 +37,6 @@ namespace ToDo.Controllers
                 ViewBag.agotime = agoTimes;
 
             };
-            throw new NotImplementedException();
             return View(itemsList);
         }
 

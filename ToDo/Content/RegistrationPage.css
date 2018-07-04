@@ -2,6 +2,7 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    margin-top: 30px;
 }
 
 body {
@@ -49,7 +50,6 @@ select {
     border-radius: 4px;
     color: #000000;
     box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-    margin-bottom: 30px;
 }
 
 input[type="radio"],
@@ -125,3 +125,18 @@ label.light {
     }
 
 }
+
+.field-validation-error {
+    color: red;
+}
+
+
+input.input-validation-error,
+textarea.input-validation-error,
+#password.field-validation-error,
+select.input-validation-error {
+    background: #FEF1EC;
+    border: 1px solid #CD0A0A;
+}
+
+

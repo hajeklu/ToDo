@@ -18,8 +18,21 @@ namespace ToDo.Models
         [HttpPost]
         public ActionResult Add(ToDo.userlogin userlogin, string user_password2)
         {
+            if (!user_password2.Equals(userlogin.password))
+            {
+                ModelState.AddModelError("passwordVertify", "Password must be same.");
+            }
 
-            if (ModelState.IsValid)
+            using (var dc = new todo_listEntities())
+            {
+                int countoflogin = dc.userlogins.Where(x => x.login.Equals(userlogin.login)).Count();
+                if (countoflogin != 0)
+                {
+                    ModelState.AddModelError("login", "Login is already exist");
+                }
+            }
+
+                if (ModelState.IsValid)
             {
 
                 userlogin.password = EncryptHelper.encryptPassword(userlogin.password);
